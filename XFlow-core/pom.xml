@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>XFlow</artifactId>
+        <groupId>com.exadatum.xsuit</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>XFlow-core</artifactId>
+
+<dependencies>
+
+    <dependency>
+        <groupId>com.exadatum.xsuit</groupId>
+        <artifactId>XFlow-spark</artifactId>
+        <version>${project.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-actor -->
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-actor_${scala.version}</artifactId>
+        <version>2.5.17</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-http -->
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-http_${scala.version}</artifactId>
+        <version>10.1.5</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql -->
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-sql_${scala.version}</artifactId>
+        <version>2.4.0</version>
+    </dependency>
+
+
+
+    <!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-stream -->
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-stream_${scala.version}</artifactId>
+        <version>2.5.17</version>
+    </dependency>
+
+
+    <!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-http-spray-json -->
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-http-spray-json_${scala.version}</artifactId>
+        <version>10.1.5</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.typesafe</groupId>
+        <artifactId>config</artifactId>
+        <version>1.3.3</version>
+    </dependency>
+
+
+</dependencies>
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.6.0</version>
+            <executions>
+                <execution>
+                    <configuration>
+                        <executable>/home/exacon02/anaconda3/bin/python</executable>
+                        <workingDirectory>src/main/resources/</workingDirectory>
+                        <arguments>
+                            <argument>Train.py</argument>
+                        </arguments>
+                    </configuration>
+                    <id>python_build1</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>exec</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <configuration>
+                        <executable>/home/exacon02/anaconda3/bin/python</executable>
+                        <workingDirectory>src/main/resources/</workingDirectory>
+                        <arguments>
+                            <argument>RESTfulService.py</argument>
+                        </arguments>
+                    </configuration>
+                    <id>python_build2</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>exec</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+
+
+</project>
